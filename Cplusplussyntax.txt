@@ -1,0 +1,68 @@
+Creating a class syntax:
+class class_name {
+  access_specifier_1:
+    member1;
+  access_specifier_2:
+    member2;
+  ...
+} object_names;
+
+// classes example
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height; //declare variable
+  public:
+    void set_values (int,int); //declare method
+    int area() {return width*height;}
+};
+
+void Rectangle::set_values (int x, int y) {
+  width = x;
+  height = y;
+} //define method outside of class
+
+int main () {
+  Rectangle rect; //create an object of a class
+  rect.set_values (3,4); //call the method of the class.
+  cout << "area: " << rect.area();
+  return 0;
+}
+
+Pointer: point to a location in the memory not the value 
+type * name; //declaring pointer
+
+templated class
+template <class A_Type> class calc
+{
+  public:
+    A_Type multiply(A_Type x, A_Type y);
+    A_Type add(A_Type x, A_Type y);
+};
+template <class A_Type> A_Type calc<A_Type>::multiply(A_Type x,A_Type y)
+{
+  return x*y;
+}
+template <class A_Type> A_Type calc<A_Type>::add(A_Type x, A_Type y)
+{
+  return x+y;
+}
+
+templated function:
+template <class type> type func_name(type arg1, ...);
+
+templated class with templated function:
+template <class type> class TClass
+{
+    // constructors, etc
+    
+    template <class type2> type2 myFunc(type2 arg);
+};
+The function myFunc is a templated function inside of a templated class, and when you actually define the function, you must respect this by using the template keyword twice: 
+template <class type>  // For the class
+    template <class type2>  // For the function
+    type2 TClass<type>::myFunc(type2 arg)
+    {
+        // code
+    }
