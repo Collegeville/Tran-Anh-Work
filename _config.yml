@@ -3,3 +3,7 @@ gems:
   - jekyll-sitemap
 gems:
   - jekyll-seo-tag
+social: 
+  name: Anh Tran
+  links: 
+    - https://www.facebook.com/profile.php?id=100004192993278
