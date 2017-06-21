@@ -3,16 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Anh Tran web</title>
+  <link href="{{site.baseurl}}/css/common.css" rel="stylesheet">
 </head>
 <body>
 <header>
   <h1> Anh Tran Web</h1>
-  <nav>
-    <ul>
-      <li><a href="{{site.baseurl}}/index">Home</a></li>
-      <li><a href="{{site.baseurl}}/news">News</a></li>
-    </ul>
-  </nav>
+  {% include nav.html %}
 </header>
 {{content}}
 
