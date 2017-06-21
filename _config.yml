@@ -1,3 +1,5 @@
 theme: jekyll-theme-cayman
 gems:
   - jekyll-sitemap
+gems:
+  - jekyll-seo-tag
