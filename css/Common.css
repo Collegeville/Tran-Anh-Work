@@ -11,3 +11,16 @@ p {
     font-family: verdana;
     font-size: 20px;
 }
+
+.current{
+    background-color: #000531;
+    color: #fff;
+}
+
+p1 {
+     font-size: 10px;
+}
+
+.nav-top{
+     font-size:1.25rem;
+}

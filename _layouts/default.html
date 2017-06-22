@@ -8,9 +8,11 @@
 <body>
 <header>
   <h1> Anh Tran Web</h1>
-  {% include nav.html %}
+  {% include nav.html navclass='nav-top' %}
 </header>
 {{content}}
-
+<footer>
+   {% include nav.html navclass='nav-bottom' %}
+   <p1> Jekyll Website Project </p1> 
 </body>
 </html>
