@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <title>Anh Tran web</title>
   <link href="{{site.baseurl}}/css/Common.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
 </head>
 <body>
-<header>
+<header class="banner">
   <h1> Anh Tran Web</h1>
-  {% include nav.html navclass='nav-top' %}
 </header>
+{% include nav.html navclass='nav-top' %}
 {{content}}
 <footer>
    {% include nav.html navclass='nav-bottom' %}
