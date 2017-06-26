@@ -1,3 +1,3 @@
-kramdown: redcarpet
+markdown: redcarpet
 baseurl: /Tran-Anh-Work
 exclude: ['README.md', 'Helpful links', 'Cplusplussyntax.txt']
