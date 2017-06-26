@@ -7,7 +7,7 @@ p {
     height: 200px;
     width: 100%;
     padding: 1em;
-    background: linear-gradient(to right, lightblue , green) no-repeat center center;
+    background: linear-gradient(to right, #5D8AA8 , green) no-repeat center center;
     text-align: center;
     color: #fff;
     font-family: 'Indie Flower', cursive; 
