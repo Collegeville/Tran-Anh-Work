@@ -1,0 +1,7 @@
+---
+layout: esport
+title: What is E-sports club
+meta: An introduction to the Esports club about what we are and what we do
+category: esport
+---
+We are a group are a group of students who like to play video games and make new friends (possibly girl friend). We host events such as casual game nights, gaming competitions, or watch E-sports' World Championship. In our events, we like to give away lots of good prizes. To have a better look at what we usually giveaway, check out our gallery. 

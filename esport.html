@@ -2,13 +2,13 @@
 layout: default
 ---
 
-<h1>News</h1>
+<h1>CSB/SJU Esports club</h1>
 
 <ul>
-   {% for post in site.categories.anh limit:2 %}
+   {% for post in site.categories.esport %}
    <li>
       <a href ="">{{post.title}}</a>
-      <p>{{post.meta}}</p>
+      <p>{{post.content}}</p>
    </li>
    {% endfor %}
 </ul>
