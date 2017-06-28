@@ -13,6 +13,10 @@ p {
     font-family: 'Indie Flower', cursive; 
     font-size: 2.5rem;
 }
+
+.banner-club{
+    background-image: url("../img/logo.png");
+}
 .current{
     color: black;
 }
@@ -23,6 +27,11 @@ p1 {
 
 .nav-top{
      font-size:1.25rem;
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #05386B;
 }
 
 .nav > li {
@@ -32,4 +41,25 @@ p1 {
 .nav {
      margin: 0;
      padding: 0;
+     list-style-type: none;
+     overflow: hidden;
+     background-color: #05386B;
+}
+
+
+li.navi {
+    float: left;
+}
+
+li.navi a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 12px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li.navi a:hover {
+    background-color: #111;
 }
