@@ -1,0 +1,54 @@
+---
+layout: esport
+bannerClass: banner-club
+---
+<div class = "slideshow-container">
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/JC.jpg" alt="image1" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/event1.2.jpg" alt="image2" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/event1.jpg" alt="image3" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/event2.2.jpg" alt="image4" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/event2.3.jpg" alt="image5" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/prizes.jpg" alt="image6" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/prizes 2.jpg" alt="image7" />
+	</div>
+	<div class="slide fade">
+		<img src="{{ site.baseurl }}../img/slide/event2.4.jpg" alt="image8" />
+	</div>
+	<a class="prev" onclick="nextSlides()">&#10094;</a>
+	<a class="next" onclick="prevSlides()">&#10095;</a>
+</div>
+<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	function nextSlides() {
+  		slideIndex++;
+  		showSlides(slideIndex);
+	}
+	function prevSlides(){
+		slideIndex--;
+		showSlides(slideIndex);
+	}
+	function showSlides(index) {
+  		var i;
+  		var slides = document.getElementsByClassName("slide");
+  		if (index > slides.length) {slideIndex = 1}    
+  		if (index < 1) {slideIndex = slides.length}
+  		for (i = 0; i < slides.length; i++) {
+      		slides[i].style.display = "none";  
+  	}
+  slides[slideIndex-1].style.display = "block";  
+}
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-ca">
+<head>
+  <meta charset="utf-8">
+  <title>Anh Tran web</title>
+  <link href="/css/Common.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
+</head>
+<body>
+<header class="banner banner-club">
+
+</header>
+<nav>
+    <ul class="nav nav-top">
+      <li class="navi"><a href="/" class="">Home</a></li>
+      <li class="navi"><a href="/news.html" class="">News</a></li>
+      <li class="navi"><a href="/esport.html" class="">Esports Club</a></li>
+    </ul>
+</nav>
+<nav>
+  <ul>
+    <li><a href="">Upcoming Event</a></li>
+    <li><a href="/gallery.html" class="current">Gallery</a></li>
+  </ul>
+</nav>
+
+<div class = "slideshow-container">
+	<div class="slide fade">
+		<img src="../img/slide/JC.jpg" alt="image1" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/event1.2.jpg" alt="image2" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/event1.jpg" alt="image3" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/event2.2.jpg" alt="image4" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/event2.3.jpg" alt="image5" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/prizes.jpg" alt="image6" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/prizes 2.jpg" alt="image7" />
+	</div>
+	<div class="slide fade">
+		<img src="../img/slide/event2.4.jpg" alt="image8" />
+	</div>
+	<a class="prev" onclick="nextSlides()">&#10094;</a>
+	<a class="next" onclick="prevSlides()">&#10095;</a>
+</div>
+<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	function nextSlides() {
+  		slideIndex++;
+  		showSlides(slideIndex);
+	}
+	function prevSlides(){
+		slideIndex--;
+		showSlides(slideIndex);
+	}
+	function showSlides(index) {
+  		var i;
+  		var slides = document.getElementsByClassName("slide");
+  		if (index > slides.length) {slideIndex = 1}    
+  		if (index < 1) {slideIndex = slides.length}
+  		for (i = 0; i < slides.length; i++) {
+      		slides[i].style.display = "none";  
+  	}
+  slides[slideIndex-1].style.display = "block";  
+}
+</script>
+<footer>
+   <nav>
+    <ul class="nav nav-bottom">
+      <li class="navi"><a href="/" class="">Home</a></li>
+      <li class="navi"><a href="/news.html" class="">News</a></li>
+      <li class="navi"><a href="/esport.html" class="">Esports Club</a></li>
+    </ul>
+</nav>
+   <p1> Jekyll Website Project </p1> 
+</body>
+</html>
