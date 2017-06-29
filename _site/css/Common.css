@@ -25,6 +25,7 @@ p {
 
 .banner-club{
     font-family: 'Indie Flower', cursive; 
+    background-image:url("../img/logo.png");
 }
 .current{
     color: white;
@@ -168,7 +169,7 @@ div.header{
 /* unvisited link */
 a:link {
     color: #fff;
-    text-decoration:none;
+    text-decoration:underline;
 }
 
 /* visited link */
