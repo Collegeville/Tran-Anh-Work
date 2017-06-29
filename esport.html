@@ -3,7 +3,34 @@ layout: esport
 bannerClass: banner-club
 ---
 
-<h1>CSB/SJU Esports club</h1>
+<div class="block"><a href="" style="color:white">Events</a></div>
+        <div style="width:max; background-color:#000; height:330px; overflow:hidden;">
+                <h6><Strong>Past Events</h6></Strong>
+		<div style="width: max; height: 300px;margin:40px 0px 30px 120px"> 
+                    <img src="{{site.baseurl}}/img/lolevent.jpg" alt="League of Legend" style="width:333; height:194px">
+                      <div style="position: absolute; top: 580px; left: 140px; width: 225px;height 25px">
+                        <center><font size = "+2" color="white"> League of Legend World Championship Viewing</center>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="{{site.baseurl}}/img/library.jpg" alt="Game night at Alcuin" style="width:333; height:194px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="{{site.baseurl}}/img/ow.jpg" alt="OverWatch Tournament" style="width:333; height:194px">
+                </div>
+         </div>
+         <div style="width:max; background-color:#424246; height:330px; overflow:hidden;">
+                <h6><Strong>Current Events</h6></Strong>
+		<div style="width: max; height: 300px;margin:40px 0px 30px 120px"> 
+                    <img src="{{site.baseurl}}/img/lolevent.jpg" alt="League of Legend" style="width:333; height:194px">
+                      <div style="position: absolute; top: 580px; left: 140px; width: 225px;height 25px">
+                        <center><font size = "+2" color="white"> League of Legend World Championship Viewing</center>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="{{site.baseurl}}/img/library.jpg" alt="Game night at Alcuin" style="width:333; height:194px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="{{site.baseurl}}/img/ow.jpg" alt="OverWatch Tournament" style="width:333; height:194px">
+                </div>
+         </div>
+<nav>
+  <ul class="bull1">
+    <li><a href="{{site.baseurl}}/gallery.html" class="{% if page.url=='/gallery.html'%}current{% endif %}">Gallery</a></li>
+  </ul>
+</nav>
 
 <ul>
    {% for post in site.categories.esport %}

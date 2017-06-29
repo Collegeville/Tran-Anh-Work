@@ -7,12 +7,14 @@
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> 
 </head>
 <body>
-<header class="banner {{page.bannerClass}}">
+{% include nav.html navclass='nav-top' %}
+<header>
 {% if page.url=='/' or page.url=='/news.html'%}
+<div class="banner">
   <h1> Anh Tran Web</h1>
+</div>
 {% endif %}
 </header>
-{% include nav.html navclass='nav-top' %}
 {{content}}
 <footer>
    {% include nav.html navclass='nav-bottom' %}
