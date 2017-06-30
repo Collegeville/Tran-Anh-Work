@@ -9,7 +9,7 @@ bannerClass: banner-club
   {% for staff in site.pages %}
     {% if staff.category == 'esport' %}
       <li style="font-size: 1.5rem;">
-         {{staff.title}}
+         <p>{{staff.title}} - {{staff.meta}}</p>
       </li>
       <ul style="list-style-type:none;">
         <li><img src="{{site.baseurl}}/img/staffs/{{staff.image}}" alt="{{staff.meta}}" style="width: 20%; height:20%"></li>
