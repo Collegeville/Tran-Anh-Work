@@ -1,0 +1,21 @@
+---
+layout: esport
+bannerClass: banner-club
+---
+<div class="block" style="background-color:#2f2f31;">Staffs</div>
+<div style="width:max; background-color:#000;overflow:hidden;">
+
+<ul style="color:white;">
+  {% for staff in site.pages %}
+    {% if staff.category == 'esport' %}
+      <li style="font-size: 1.5rem;">
+         {{staff.title}}
+      </li>
+      <ul style="list-style-type:none;">
+        <li><img src="{{site.baseurl}}/img/staffs/{{staff.image}}" alt="{{staff.meta}}" style="width: 20%; height:20%"></li>
+	<li><p>{{staff.content}}</p><li>
+      </ul>
+    {% endif %}
+  {% endfor %}
+</ul>
+</div>
