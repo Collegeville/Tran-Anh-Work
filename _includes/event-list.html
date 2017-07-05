@@ -1,0 +1,11 @@
+<ul style="list-style-type:none; margin:10; padding: 10;">
+  {% for event in site.pages %}
+    {% if event.category == include.category %} 
+      <li><img src="{{site.baseurl}}/img/{{event.image}}" style="width:333; height:194px"></li>
+        <ul>
+     	 <li>Date: {{event.date}}</li>
+      	 <li>{{event.content}}</li>
+        </ul>
+    {% endif %}
+  {% endfor %}
+</ul>

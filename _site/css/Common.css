@@ -7,6 +7,12 @@ body.esport {
  font-family: Arial;
 }
 
+header {
+ color: white;
+ font-size: 2.5rem;
+ font-weigh: bold;
+}
+
 p {
     font-family: verdana;
     font-size: 20px;
@@ -189,3 +195,8 @@ a:active {
     color: #fff;
     text-decoration:none;
 } 
+
+li{
+  margin: 5px 0;
+  padding: 0;
+}
