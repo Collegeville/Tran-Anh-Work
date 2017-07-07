@@ -14,6 +14,7 @@
       <li class="navi"><a href="/esport.html" class="current">Esports Club</a></li>
     </ul>
 </nav>
+
 <header>
 
 </header>
@@ -21,31 +22,31 @@
 <header class="banner banner-club"></header>
 
 <div class="block" style="background-color:#2f2f31;"><a href="/staffs/" style="color:white">Who we are (staffs)</a></div>
-         <div style="width:max; background: linear-gradient(to right, black, #11597f ) no-repeat center center;; height:100px; padding:50px;">
+         <div class="staff">
 		<h style="color:white; font-size:1.25rem;">We are a group of students who like to play video games and make new friends (possibly girl friend). We host events such as casual game nights, gaming competitions, or watch E-sports' World Championship. In our events, we like to give away lots of good prizes. To have a better look at what we usually giveaway, check out our gallery. </h>
          </div>
 
-<div class="block" style="margin-top:25px"><a href="/esportevent/" style="color:white">Events</a></div>
-        <div style="width:max; background-color:#000; height:330px; overflow:hidden;">
+<div class="block"><a href="/esportevent/" style="color:white">Events</a></div>
+        <div id="myEvent">
                 <h6><Strong>Past Events</h6></Strong>
-		<div style="width: max; height: 300px;margin:40px 0px 30px 120px"> 
-                    <img src="/img/lolevent.jpg" alt="League of Legend" style="width:333; height:194px">
+		<div class="rectangle"> 
+                    <img src="/img/lolevent.jpg" alt="League of Legend" class="big">
                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/img/library.jpg" alt="Game night at Alcuin" style="width:333; height:194px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/img/ow.jpg" alt="OverWatch Tournament" style="width:333; height:194px">
+                        <img src="/img/library.jpg" alt="Game night at Alcuin" class="big">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="/img/ow.jpg" alt="OverWatch Tournament" class="big">
                 </div>
          </div>
-         <div style="width:max; background-color:#2d3f50; height:330px; overflow:hidden;">
+         <div class="event" style="background-color:#2d3f50;">
                 <h6><Strong>Current Events</h6></Strong>
-		<div style="width: max; height: 300px;margin:40px 0px 30px 120px"> 
-                    <img src="/img/involvement.jpg" alt="Involvement Fair" style="width:333; height:194px">
+		<div class="rectangle"> 
+                    <img src="/img/involvement.jpg" alt="Involvement Fair" class="big"/>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/img/meeting.jpg" alt="General Meeting" style="width:333; height:194px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="/img/gamenight.jpg" alt="Game Night" style="width:333; height:194px">
+                        <img src="/img/meeting.jpg" alt="General Meeting" class="big">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="/img/gamenight.jpg" alt="Game Night" class="big">
                 </div>
          </div>
-<div class="block" style="margin-top:25px"><a href="/gallery.html" style="color:white">Gallery (Click to see more)</a></div>
-         <div style="width:max; background-color:#000; height:280px; overflow:hidden;">
+<div class="block"><a href="/gallery.html" style="color:white">Gallery (Click to see more)</a></div>
+         <div class="event" style="height:280px;">
 		<div style="width: max; height: 280px; margin:50px 0px 30px 55px"> 
                     <img src="/img/slide/JC.jpg" alt="image1" style="width: 240px;height:160px" />
                     <img src="/img/slide/event1.jpg" alt="image2" style="width: 240px;height:160px" />
@@ -55,6 +56,17 @@
                 </div>
          </div>
 
+<script>
+window.onscroll = function() {myFunction()};
+
+function myFunction() {
+    if (document.body.scrollTop > 250 && document.body.scrollTop <400|| document.documentElement.scrollTop > 250 && document.documentElement.scrollTop < 400) {
+        document.getElementById("myEvent").className = "event";
+    } else {
+        document.getElementById("myEvent").className = "event";
+    }
+}
+</script>
 
 </body>
 <footer>
@@ -65,6 +77,7 @@
       <li class="navi"><a href="/esport.html" class="current">Esports Club</a></li>
     </ul>
 </nav>
+
    <p1> Powered by Anh Tran </p1> 
 </body>
 </html>

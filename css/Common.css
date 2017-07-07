@@ -31,7 +31,9 @@ p {
 
 .banner-club{
     font-family: 'Indie Flower', cursive; 
-    background-image:url("../img/logo.png");
+    background-image:url("../img/logoNew.png");
+    background-size: contain;
+
 }
 .current{
     color: white;
@@ -48,6 +50,7 @@ p1 {
      padding: 0;
      overflow: hidden;
      background-color: #05386B;
+
 }
 
 .nav > li {
@@ -161,7 +164,7 @@ div.block{
   text-align: left;
   font-size: 1.5rem;
   padding: 10px;
-  margin:0;
+  margin:25px 0 0 0;
 }
 
 div.header{
@@ -199,4 +202,43 @@ a:active {
 li{
   margin: 5px 0;
   padding: 0;
+}
+
+div.event{
+  width: max;
+  background-color:#000; 
+  height:330px;
+  overflow:hidden;
+}
+
+div.staff{
+  width:max;
+  background: linear-gradient(to right, black, #11597f ) no-repeat center center;
+  height:100px; 
+  padding:50px;
+}
+
+div.rectangle{
+  width: max; 
+  height: 300px;
+  margin:40px 0px 30px 90px;
+}
+
+div.eventbig{
+  width: max;
+  background-color:#000; 
+  height:330px;
+  overflow:hidden;
+  transform: scale(1, 2);
+}
+
+img.big{
+  width:333px; 
+  height:194px;
+  -webkit-transition: width 1s, height 1s;
+}
+
+img.big:hover{
+  width: 499.5px;
+  height: 291px;
 }
