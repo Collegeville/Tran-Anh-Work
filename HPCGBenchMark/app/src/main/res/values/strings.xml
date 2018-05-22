@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HPCG Bench Mark</string>
+    <string name="_500">500</string>
+    <string name="hint" />
+</resources>
