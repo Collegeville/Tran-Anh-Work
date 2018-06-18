@@ -50,11 +50,11 @@ using std::endl;
 
   @see YAML_Doc
 */
-void ReportResults(const SparseMatrix & A, int numberOfMgLevels, int numberOfCgSets, int refMaxIters,int optMaxIters, double times[],
+double ReportResults(const SparseMatrix & A, int numberOfMgLevels, int numberOfCgSets, int refMaxIters,int optMaxIters, double times[],
     const TestCGData & testcg_data, const TestSymmetryData & testsymmetry_data, const TestNormsData & testnorms_data, int global_failure, bool quickPath) {
 
   double minOfficialTime = 1800; // Any official benchmark result must run at least this many seconds
-
+  double result;
 //#ifndef HPCG_NO_MPI
   //double t4 = times[4];
   //double t4min = 0.0;
@@ -351,6 +351,7 @@ void ReportResults(const SparseMatrix & A, int numberOfMgLevels, int numberOfCgS
     doc.get("GFLOP/s Summary")->add("Total with convergence overhead",frefnops/times[0]/1.0E9);
     // This final GFLOP/s rating includes the overhead of problem setup and optimizing the data structures vs ten sets of 50 iterations of CG
     double totalGflops = frefnops/(times[0]+fNumberOfCgSets*(times[7]/10.0+times[9]/10.0))/1.0E9;
+      result = totalGflops;
     double totalGflops24 = frefnops/(times[0]+fNumberOfCgSets*times[7]/10.0)/1.0E9;
     doc.get("GFLOP/s Summary")->add("Total with convergence and optimization phase overhead",totalGflops);
 
@@ -409,5 +410,5 @@ void ReportResults(const SparseMatrix & A, int numberOfMgLevels, int numberOfCgS
     HPCG_fout << yaml;
 #endif
   }
-  return;
+  return result;
 }

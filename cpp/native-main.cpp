@@ -73,15 +73,21 @@ using std::endl;
 */
 
 extern "C" JNIEXPORT
-jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env, jint argc, jchar test) {
+jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env, jint argc, jstring dx, jstring dy, jstring dz) {
 
 //#ifndef HPCG_NO_MPI
   //MPI_Init(&argc, &argv);
 //#endif
-    char ** argv;
+    char **argv;
+    argv = new char*[4];
+    //argv=new char* [4];
+    argv[0]= const_cast<char *>("i");
+    argv[1]= reinterpret_cast<char *>(dx);
+    argv[2]= reinterpret_cast<char *>(dy);
+    argv[3]= reinterpret_cast<char *>(dz);
   HPCG_Params params;
   HPCG_Init(&argc, &argv, params);
-
+    delete(argv);
   // Check if QuickPath option is enabled.
   // If the running time is set to zero, we minimize all paths through the program
   bool quickPath = (params.runningTime==0);
@@ -89,7 +95,7 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
   int size = params.comm_size, rank = params.comm_rank; // Number of MPI processes, My process ID
 
 #ifdef HPCG_DETAILED_DEBUG
-  if (size < 100 && rank==0) hpcg.HPCG_fout << "Process "<<rank<<" of "<<size<<" is alive with " << params.numThreads << " threads." <<endl;
+  if (size < 100 && rank==0) HPCG_fout << "Process "<<rank<<" of "<<size<<" is alive with " << params.numThreads << " threads." <<endl;
 
   if (rank==0) {
     char c;
@@ -116,7 +122,7 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
   /////////////////////////
 
 #ifdef HPCG_DEBUG
-  double t1 = mytimer.mytimer();
+  double t1 = mytimer();
 #endif
 
   // Construct the geometry and linear system
@@ -233,11 +239,11 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
   t7 = mytimer() - t7;
   times[7] = t7;
 #ifdef HPCG_DEBUG
-  if (rank==0) hpcg.HPCG_fout << "Total problem setup time in main (sec) = " << mytimer() - t1 << endl;
+  if (rank==0) HPCG_fout << "Total problem setup time in main (sec) = " << mytimer() - t1 << endl;
 #endif
 
 #ifdef HPCG_DETAILED_DEBUG
-  if (geom->size == 1) WriteProblem.WriteProblem(*geom, A, b, x, xexact);
+  if (geom->size == 1) WriteProblem(*geom, A, b, x, xexact);
 #endif
 
 
@@ -246,7 +252,7 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
   //////////////////////////////
 
 #ifdef HPCG_DEBUG
-  t1 = mytimer.mytimer();
+  t1 = mytimer();
 #endif
   TestCGData testcg_data;
   testcg_data.count_pass = testcg_data.count_fail = 0;
@@ -358,7 +364,7 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
   ////////////////////
 
   // Report results to YAML file
-  ReportResults(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data, global_failure, quickPath);
+  double result = ReportResults(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data, global_failure, quickPath);
 
   // Clean up
   DeleteMatrix(A); // This delete will recursively delete all coarse grid data
@@ -378,5 +384,5 @@ jint JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env,
 //#ifndef HPCG_NO_MPI
   //MPI_Finalize();
 //#endif
-  return 0;
+  return result;
 }
