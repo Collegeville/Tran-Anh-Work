@@ -73,21 +73,19 @@ using std::endl;
 */
 
 extern "C" JNIEXPORT
-jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env, jint argc, jstring dx, jstring dy, jstring dz) {
+jdoubleArray JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* env, jobject thisObject, jint argc, jstring dx, jstring dy, jstring dz) {
 
 //#ifndef HPCG_NO_MPI
   //MPI_Init(&argc, &argv);
 //#endif
-    char **argv;
-    argv = new char*[4];
-    //argv=new char* [4];
-    argv[0]= const_cast<char *>("i");
-    argv[1]= reinterpret_cast<char *>(dx);
-    argv[2]= reinterpret_cast<char *>(dy);
-    argv[3]= reinterpret_cast<char *>(dz);
+    jdoubleArray returnResult;
+    returnResult = env->NewDoubleArray(2);
+    char* paramX = const_cast<char *>(env->GetStringUTFChars(dx, NULL));
+    char* paramY = const_cast<char *>(env->GetStringUTFChars(dy, NULL));
+    char* paramZ = const_cast<char *>(env->GetStringUTFChars(dz, NULL));
   HPCG_Params params;
-  HPCG_Init(&argc, &argv, params);
-    delete(argv);
+  HPCG_Init(&argc, paramX, paramY, paramZ, params);
+
   // Check if QuickPath option is enabled.
   // If the running time is set to zero, we minimize all paths through the program
   bool quickPath = (params.runningTime==0);
@@ -114,8 +112,7 @@ jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* e
   int ierr = 0;  // Used to check return codes on function calls
 
   ierr = CheckAspectRatio(0.125, nx, ny, nz, "local problem", rank==0);
-  if (ierr)
-    return ierr;
+
 
   /////////////////////////
   // Problem setup Phase //
@@ -127,11 +124,10 @@ jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* e
 
   // Construct the geometry and linear system
   Geometry * geom = new Geometry;
-  GenerateGeometry(size, rank, params.numThreads, params.pz, params.zl, params.zu, nx, ny, nz, params.npx, params.npy, params.npz, geom);
+    GenerateGeometry(size, rank, params.numThreads, params.pz, params.zl, params.zu, nx, ny, nz, params.npx, params.npy, params.npz, geom);
+  int ierr2;
+    ierr2 = CheckAspectRatio(0.125, geom->npx, geom->npy, geom->npz, "process grid", rank==0);
 
-  ierr = CheckAspectRatio(0.125, geom->npx, geom->npy, geom->npz, "process grid", rank==0);
-  if (ierr)
-    return ierr;
 
   // Use this array for collecting timing information
   std::vector< double > times(10,0.0);
@@ -364,7 +360,25 @@ jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* e
   ////////////////////
 
   // Report results to YAML file
-  double result = ReportResults(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data, global_failure, quickPath);
+  double* result;
+  result = (double*)malloc(2*sizeof(*result));
+    result[0] = ReportGFlops(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
+    result[1]= ReportBandwidth(A, numberOfMgLevels, numberOfCgSets, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
+  jdouble resultArray[2];
+    if(ierr||ierr2){
+        resultArray[0]=0;
+        resultArray[1]=0;
+    }
+    else{
+        resultArray[0] =(jdouble)result[0];
+        resultArray[1] = (jdouble)result[1];
+    }
+    free(result);
+    //free(resultArray);
+
+    env->SetDoubleArrayRegion(returnResult, 0, 2, resultArray);
+    delete[]result;
+
 
   // Clean up
   DeleteMatrix(A); // This delete will recursively delete all coarse grid data
@@ -384,5 +398,5 @@ jdouble JNICALL Java_com_example_anhbt_hpcgbenchmark_MainActivity_main(JNIEnv* e
 //#ifndef HPCG_NO_MPI
   //MPI_Finalize();
 //#endif
-  return result;
+  return returnResult;
 }
