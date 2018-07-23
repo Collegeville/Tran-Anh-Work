@@ -18,9 +18,9 @@
     IBOutlet UITextField *zInput;
     IBOutlet UITextField *xInput;
     IBOutlet UITextField *yInput;
+    __weak IBOutlet UILabel *GflopsResult;
+    __weak IBOutlet UILabel *BandWidthResult;
     NSString *dx;
-    __weak IBOutlet UITextField *BandwidthResult;
-    __weak IBOutlet UITextField *GflopsResult;
     NSString *dy;
     NSString *dz;
      __weak IBOutlet UIButton *button;

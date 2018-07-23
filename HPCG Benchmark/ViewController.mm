@@ -96,18 +96,22 @@
     zDim.text = @"z Dimension";
     [self.view addSubview:zDim];
     
-    //bandwidth
-    Bandwidth = [[UILabel alloc]initWithFrame:CGRectMake(80.5, 275.5, 86.5, 20.5)];
-    Bandwidth.numberOfLines = 0;
-    Bandwidth.textColor = [UIColor blackColor];
-    Bandwidth.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:Bandwidth];
 }
 - (IBAction)runButton:(id)sender {
     const char *x = [dx UTF8String];
     const char *y = [dy UTF8String];
     const char *z = [dz UTF8String];
-    hpcg(4, (char *)x, (char *)y, (char *)z);
+    double *result;
+    result = hpcg(4, (char *)x, (char *)y, (char *)z);
+    NSString *gResult = [NSString stringWithFormat:@"%f", result[0]];
+    NSString *bwResult = [NSString stringWithFormat:@"%f", result[1]];
+    GflopsResult.text=gResult;
+    BandWidthResult.text=bwResult;
+    Bandwidth.hidden = NO;
+    Gflops.hidden = NO;
+    GflopsResult.hidden = NO;
+    BandWidthResult.hidden = NO;
+    
 }
 
 @end
