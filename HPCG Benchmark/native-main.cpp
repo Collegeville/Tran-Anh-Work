@@ -29,11 +29,10 @@
 #include <iostream>
 #include <cstdlib>
 using std::endl;
-
 #include <vector>
 
 #include "hpcg.hpp"
-
+#include "main.hpp"
 #include "CheckAspectRatio.hpp"
 #include "GenerateGeometry.hpp"
 #include "GenerateProblem.hpp"
@@ -57,27 +56,25 @@ using std::endl;
 #include "TestCG.hpp"
 #include "TestSymmetry.hpp"
 #include "TestNorms.hpp"
+#include "struct.hpp"
 
 /*!
   Main driver program: Construct synthetic problem, run V&V tests, compute benchmark parameters, run benchmark, report results.
 
-  @param[in]  argc Standard argument count.  Should equal 1 (no arguments passed in) or 4 (nx, ny, nz passed in)
-  @param[in]  dx the x dimension of the matrix.
-  @param[in]  dy the y dimension of the matrix.
-  @param[in]  dz the z dimension of the matrix.
- 
-  @return Returns zero on success and a non-zero value otherwise.
+  @param[in]  matrices struct that contain the dimension of the matrix.
 
 */
 
-double* hpcg(int argc, char* dx, char* dy, char* dz) {
+void* hpcg(void *matrices) {
 
 //#ifndef HPCG_NO_MPI
   //MPI_Init(&argc, &argv);
 //#endif
-    char* paramX = dx;
-    char* paramY = dy;
-    char* paramZ = dz;
+    struct args *args = (struct args *) matrices;
+    char* paramX = args->dx;
+    char* paramY = args->dy;
+    char* paramZ = args->dz;
+    int argc = args->argc;
   HPCG_Params params;
   HPCG_Init(&argc, paramX, paramY, paramZ, params);
 
@@ -343,16 +340,13 @@ double* hpcg(int argc, char* dx, char* dy, char* dz) {
   ////////////////////
 
   // Report results to YAML file
-  double* result;
-  result = (double*)malloc(2*sizeof(*result));
-    result[0] = ReportGFlops(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
-    result[1]= ReportBandwidth(A, numberOfMgLevels, numberOfCgSets, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
+
+    args->result[0] = ReportGFlops(A, numberOfMgLevels, numberOfCgSets, refMaxIters, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
+    args->result[1]= ReportBandwidth(A, numberOfMgLevels, numberOfCgSets, optMaxIters, &times[0], testcg_data, testsymmetry_data, testnorms_data);
     if(ierr||ierr2){
-        result[0]=0;
-        result[1]=0;
+        args->result[0]=0;
+        args->result[1]=0;
     }
-
-
 
   // Clean up
   DeleteMatrix(A); // This delete will recursively delete all coarse grid data
@@ -367,10 +361,11 @@ double* hpcg(int argc, char* dx, char* dy, char* dz) {
 
 
   HPCG_Finalize();
-
+    int ctr = 1;
   // Finish up
 //#ifndef HPCG_NO_MPI
   //MPI_Finalize();
 //#endif
-  return result;
+    pthread_exit(NULL);
+ return nullptr;
 }

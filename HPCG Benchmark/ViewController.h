@@ -20,6 +20,7 @@
     IBOutlet UITextField *yInput;
     __weak IBOutlet UILabel *GflopsResult;
     __weak IBOutlet UILabel *BandWidthResult;
+    __weak IBOutlet UIActivityIndicatorView *progressSpin;
     NSString *dx;
     NSString *dy;
     NSString *dz;

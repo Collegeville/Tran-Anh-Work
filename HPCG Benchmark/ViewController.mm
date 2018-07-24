@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "main.hpp"
+#import "pthread.h"
+#import "struct.hpp"
+
 
 @interface ViewController (){
 }
@@ -17,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    progressSpin.hidden = YES;
     // Do any additional setup after loading the view, typically from a nib.
     [self addInputs];
     [self addLabels];
@@ -68,6 +72,9 @@
     dx = xInput.text;
     dy = yInput.text;
     dz = zInput.text;
+    if([dx  isEqual: @""]){
+        dx = dy;
+    }
     
 }
 
@@ -98,13 +105,42 @@
     
 }
 - (IBAction)runButton:(id)sender {
+    pthread_attr_t attr;
+    pthread_t posixThreadID;
+    int returnVal;
+    struct args *args;
+    args = (struct args*)malloc(sizeof(*args));
+
+
     const char *x = [dx UTF8String];
     const char *y = [dy UTF8String];
     const char *z = [dz UTF8String];
-    double *result;
-    result = hpcg(4, (char *)x, (char *)y, (char *)z);
+    
+    args->argc = 4;
+    args->dx = (char *)x;
+    args->dy = (char *)y;
+    args->dz = (char *)z;
+    double *result = (double *)malloc(2*sizeof(*result));
+    args->result = result;
+    returnVal = pthread_attr_init(&attr);
+    assert(!returnVal);
+    returnVal = pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_DETACHED);
+    assert(!returnVal);
+    progressSpin.hidden = NO;
+    [progressSpin startAnimating];
+    int ret = pthread_create(&posixThreadID, NULL,hpcg, args);
+    pthread_join(posixThreadID, NULL);
+    [progressSpin stopAnimating];
+    progressSpin.hidden = YES;
     NSString *gResult = [NSString stringWithFormat:@"%f", result[0]];
     NSString *bwResult = [NSString stringWithFormat:@"%f", result[1]];
+    returnVal = pthread_attr_destroy(&attr);
+    assert(!returnVal);
+    if (ret !=0){
+        Gflops.text = @"please type in valid number for matrices' dimensions";
+        Gflops.hidden = NO;
+    }
+    
     GflopsResult.text=gResult;
     BandWidthResult.text=bwResult;
     Bandwidth.hidden = NO;
